@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Training Form</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group me-2">
+      <button type="button" class="btn btn-sm btn-outline-secondary" (click)="close()"><i class="bi bi-x"></i></button>
+    </div>
+  </div>
+</div>
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingName" [formControl]="nameControl"
+                   placeholder="Frank Kachinga">
+            <label for="floatingName">Name</label>
+            <div class="invalid-feedback"
+                 *ngIf="nameControl.hasError('required') && nameControl.invalid && nameControl.touched">
+              Name is required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInstitute" [formControl]="instituteControl"
+                   placeholder="University of Dar es salaam">
+            <label for="floatingInstitute">Institute</label>
+            <div class="invalid-feedback"
+                 *ngIf="instituteControl.hasError('required') && instituteControl.invalid && instituteControl.touched">
+              Institute is required
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingDob" [formControl]="dateControl"
+                   placeholder="">
+            <label for="floatingDob">Date</label>
+            <div class="invalid-feedback"
+                 *ngIf="dateControl.hasError('required') && dateControl.invalid && dateControl.touched">
+              Date is required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-end">
+    <button type="button" (click)="save()" [disabled]="nameControl.invalid || dateControl.invalid" class="btn btn-sm btn-primary">
+      Save
+    </button>
+  </div>
+</div>
+
+

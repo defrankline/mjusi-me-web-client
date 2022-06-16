@@ -1,0 +1,122 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Student Form</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group me-2">
+      <button type="button" class="btn btn-sm btn-outline-secondary" (click)="close()"><i class="bi bi-x"></i></button>
+    </div>
+  </div>
+</div>
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingName" [formControl]="nameControl"
+                   placeholder="Frank Kachinga">
+            <label for="floatingName">Name</label>
+            <div class="invalid-feedback"
+                 *ngIf="nameControl.hasError('required') && nameControl.invalid && nameControl.touched">
+              Name is required
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingDob" [formControl]="dobControl"
+                   placeholder="">
+            <label for="floatingDob">Birth Date</label>
+            <div class="invalid-feedback"
+                 *ngIf="dobControl.hasError('required') &&dobControl.invalid && dobControl.touched">
+              Birth Date is required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingMobile" [formControl]="mobileControl"
+                   placeholder="0752936798">
+            <label for="floatingMobile">Mobile #</label>
+            <div class="invalid-feedback"
+                 *ngIf="mobileControl.hasError('required') &&mobileControl.invalid && mobileControl.touched">
+              Mobile is required
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingEmail" [formControl]="emailControl"
+                   placeholder="name@example.com">
+            <label for="floatingEmail">Email address</label>
+            <div class="invalid-feedback"
+                 *ngIf="emailControl.hasError('required') &&emailControl.invalid && emailControl.touched">
+              Email is required
+            </div>
+            <div class="invalid-feedback"
+                 *ngIf="emailControl.hasError('email') &&emailControl.invalid && emailControl.touched">
+              Valid Email is required
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingUsername" [formControl]="usernameControl"
+                   placeholder="kachinga">
+            <label for="floatingUsername">Username</label>
+            <div class="invalid-feedback"
+                 *ngIf="usernameControl.hasError('required') && usernameControl.invalid && usernameControl.touched">
+              Username is required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-2">
+          <div class="input-group mb-3">
+            <select class="form-select" [formControl]="sexControl" id="inputGroupSelect02">
+              <option selected>Choose...</option>
+              <option value="MALE">MALE</option>
+              <option value="FEMALE">FEMALE</option>
+            </select>
+            <label class="input-group-text" for="inputGroupSelect02">Sex</label>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="input-group mb-3">
+            <select class="form-select" [formControl]="maritalStatusControl" id="inputGroupSelect03">
+              <option selected>Choose...</option>
+              <option value="SINGLE">SINGLE</option>
+              <option value="MARRIED">MARRIED</option>
+              <option value="WIDOWED">WIDOWED</option>
+              <option value="SEPARATED">SEPARATED</option>
+              <option value="DIVORCED">DIVORCED</option>
+            </select>
+            <label class="input-group-text" for="inputGroupSelect03">Marital Status</label>
+          </div>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-6">
+          <div class="input-group mb-3">
+            <select class="form-select" [formControl]="roleControl" [compareWith]="bindRole" multiple
+                    aria-label="multiple select example"
+                    id="inputGroupSelect04">
+              <option [value]="role" *ngFor="let role of getRoles()|async as roles">{{role.name}}</option>
+            </select>
+            <label class="input-group-text" for="inputGroupSelect04">Role Assigned</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-end">
+    <button type="button" (click)="save()" [disabled]="nameControl.invalid || maritalStatusControl.invalid
+     || sexControl.invalid || usernameControl.invalid || emailControl.invalid" class="btn btn-sm btn-primary">
+      Save
+    </button>
+  </div>
+</div>
+
+

@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {User} from "../user";
 import {UserService} from "../user.service";
 import {BehaviorSubject, Observable} from "rxjs";
-import {Role} from "../../role/role";
 
 @Component({
   selector: 'app-delete',

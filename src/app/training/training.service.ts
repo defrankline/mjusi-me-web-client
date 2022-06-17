@@ -24,7 +24,7 @@ export class TrainingService {
     return this.httpClient.get<CustomResponse>(this.apiURL, {
       params: {
         size: `${size}`,
-        page: `${size}`,
+        page: `${page}`,
       }
     })
       .pipe(

@@ -4,6 +4,8 @@ import {User} from "./user";
 import {BehaviorSubject, Observable} from "rxjs";
 import {CustomResponse} from "../custom-response";
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment.prod";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-user',
@@ -11,23 +13,35 @@ import {Router} from "@angular/router";
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+  page = environment.page;
+  size = environment.size;
+  totalItems = 0;
+  maxSize = environment.maxSize;
+  perPageOptions = environment.perPageOptions;
+  perPageControl = new FormControl(this.size);
   itemListSubject: BehaviorSubject<User[]> = new BehaviorSubject([{} as User]);
 
   constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.loadUsers(this.size, this.page);
   }
 
-  loadUsers(): void {
-    this.userService.getAll().subscribe((response: CustomResponse) => {
-      this.itemListSubject.next(response.data)
+  loadUsers(size: number, page: number): void {
+    this.userService.getAll(size, page).subscribe((response: CustomResponse) => {
+      this.itemListSubject.next(response.data.content)
+      this.totalItems = response.data.totalElements;
     })
   }
 
   getItems(): Observable<User[]> {
     return this.itemListSubject.asObservable();
+  }
+
+  pageChanged(page: number): void {
+    this.page = page - 1;
+    this.loadUsers(this.size, this.page);
   }
 
   form(user?: User): void {
@@ -44,5 +58,10 @@ export class UserComponent implements OnInit {
 
   download(): void {
 
+  }
+
+  pageSizeChanged() {
+    this.size = this.perPageControl.value;
+    this.loadUsers(this.size, this.page);
   }
 }

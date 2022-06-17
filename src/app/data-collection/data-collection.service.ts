@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment.prod";
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 import {CustomResponse} from "../custom-response";
-import {Role} from "./role";
+import {DataCollection, UserTrainingCreateDto} from "./data-collection";
 
 @Injectable({
   providedIn: 'root'
 })
-export class RoleService {
-  private readonly apiURL = environment.api + '/roles';
+export class DataCollectionService {
+  private readonly apiURL = environment.api + '/dataCollection';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -20,11 +20,12 @@ export class RoleService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAll(size = 0, page = 0): Observable<CustomResponse> {
+  getAll(size = 0, page = 0, query = ''): Observable<CustomResponse> {
     return this.httpClient.get<CustomResponse>(this.apiURL, {
       params: {
         size: `${size}`,
         page: `${page}`,
+        query: `${query}`,
       }
     })
       .pipe(
@@ -32,8 +33,15 @@ export class RoleService {
       )
   }
 
-  create(item: Role): Observable<CustomResponse> {
-    return this.httpClient.post<CustomResponse>(this.apiURL, item, this.httpOptions)
+  report(): Observable<CustomResponse> {
+    return this.httpClient.get<CustomResponse>(this.apiURL+'/report')
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
+  create(data: UserTrainingCreateDto): Observable<CustomResponse> {
+    return this.httpClient.post<CustomResponse>(this.apiURL, data, this.httpOptions)
       .pipe(catchError(this.errorHandler))
   }
 
@@ -42,8 +50,8 @@ export class RoleService {
       .pipe(catchError(this.errorHandler))
   }
 
-  update(id: number | undefined, role: Role): Observable<CustomResponse> {
-    return this.httpClient.put<CustomResponse>(this.apiURL + '/' + id, role, this.httpOptions)
+  update(id: number | undefined, dataCollection: UserTrainingCreateDto): Observable<CustomResponse> {
+    return this.httpClient.put<CustomResponse>(this.apiURL + '/' + id, dataCollection, this.httpOptions)
       .pipe(catchError(this.errorHandler))
   }
 

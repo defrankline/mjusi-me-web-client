@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TrainingService} from "../training.service";
 import {DatePipe} from "@angular/common";
 import {CustomResponse} from "../../custom-response";
-import {Role} from "../../role/role";
 import {User} from "../../user/user";
 
 @Component({

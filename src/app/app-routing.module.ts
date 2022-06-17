@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () => import(`./dashboard/dashboard.module`).then(module => module.DashboardModule)
   },
   {
+    path: 'data-collection',
+    loadChildren: () => import(`./data-collection/data-collection.module`).then(module => module.DataCollectionModule)
+  },
+  {
     path: 'trainings',
     loadChildren: () => import(`./training/training.module`).then(module => module.TrainingModule)
   },

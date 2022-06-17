@@ -1,0 +1,49 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Student Training Record Form</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group me-2">
+      <button type="button" class="btn btn-sm btn-outline-secondary" (click)="close()"><i class="bi bi-x"></i></button>
+    </div>
+  </div>
+</div>
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+          <label for="typeahead-prevent-manual-entry" class="col-xs-3 col-sm-auto col-form-label">Search Student
+            ...</label>
+          <div class="col">
+            <input id="typeahead-prevent-manual-entry" type="text" class="form-control"
+                   [formControl]="userControl"
+                   [ngbTypeahead]="search"
+                   [inputFormatter]="formatter"
+                   [resultFormatter]="formatter"
+                   [editable]='false'/>
+          </div>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col">
+          <div class="input-group mb-3">
+            <select class="form-select" [formControl]="trainingControl" [compareWith]="bindTraining" multiple
+                    aria-label="multiple select example"
+                    id="inputGroupSelect04">
+              <option [value]="training"
+                      *ngFor="let training of getTrainings()|async as roles">{{training.name}}</option>
+            </select>
+            <label class="input-group-text" for="inputGroupSelect04">Trainings Received</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-end">
+    <button type="button" (click)="save()" [disabled]="trainingControl.invalid || userControl.invalid"
+            class="btn btn-sm btn-primary">
+      Save
+    </button>
+  </div>
+</div>
+
+

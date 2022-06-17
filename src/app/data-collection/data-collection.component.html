@@ -1,9 +1,8 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Users</h1>
+  <h1 class="h2">Training History</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group me-2">
-      <button type="button" class="btn btn-sm btn-outline-secondary" (click)="form()">Create</button>
-      <!--<button type="button" class="btn btn-sm btn-outline-secondary" (click)="download()">Download</button>-->
+      <button type="button" class="btn btn-sm btn-outline-secondary" (click)="form()">Record Training</button>
     </div>
   </div>
 </div>
@@ -13,24 +12,17 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Student</th>
-      <th scope="col">Birth Date</th>
-      <th scope="col">Sex</th>
-      <th scope="col">Marital Status</th>
+      <th scope="col">Training</th>
       <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of data;let i = index">
-      <td>{{i + 1}}</td>
-      <td>{{user.name}}</td>
-      <td>{{user.dob|date:'mediumDate'}}</td>
-      <td>{{user.gender}}</td>
-      <td>{{user.maritalStatus}}</td>
+    <tr *ngFor="let item of data;let i = index">
+      <td>{{i+1}}</td>
+      <td>{{item.user?.name}}</td>
+      <td>{{item.training?.name}}</td>
       <td>
-        <button class="btn btn-sm btn-primary" (click)="form(user)">
-          <i class="bi bi-pen"></i>
-        </button>
-        <button class="btn btn-sm btn-warning mx-1" (click)="delete(user)">
+        <button class="btn btn-sm btn-warning mx-1" (click)="delete(item)">
           <i class="bi bi-trash"></i>
         </button>
       </td>

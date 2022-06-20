@@ -39,12 +39,12 @@
   </table>
   <nav>
     <div class="row">
-      <div class="col-10">
+      <div class="col-8">
         <ngb-pagination [collectionSize]="totalItems" [maxSize]="5" [page]="(page+1)" [pageSize]="size"
                         (pageChange)="pageChanged($event)" [rotate]="true" [ellipses]="false"
                         [boundaryLinks]="true"></ngb-pagination>
       </div>
-      <div class="col-2">
+      <div class="col-4">
         <div class="input-group mb-3">
           <select class="form-select" (change)="pageSizeChanged()" [formControl]="perPageControl" id="inputGroupSelect03">
             <option [value]="option" *ngFor="let option of perPageOptions">{{option}}</option>
